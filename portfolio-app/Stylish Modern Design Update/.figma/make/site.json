@@ -1,0 +1,10 @@
+{
+  "description": "Delivers a modern, stylish interface with developer-inspired graphics to enhance user engagement and provide an entertaining browsing experience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
