@@ -1,0 +1,14 @@
+
+
+
+@if (!isAdminRoute()) {
+  <app-navbar />
+}
+
+<main class="page">
+  <router-outlet />
+</main>
+
+@if (!isAdminRoute()) {
+  <app-footer />
+}

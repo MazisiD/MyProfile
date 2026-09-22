@@ -1,0 +1,22 @@
+import { Component, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { Navbar } from './shared/navbar/navbar';
+import { Footer } from './shared/footer/footer';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, Navbar, Footer],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  protected readonly isAdminRoute = signal(false);
+
+  constructor(router: Router) {
+    router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(event => this.isAdminRoute.set(event.urlAfterRedirects.startsWith('/kayi-kayi')));
+  }
+}
+
