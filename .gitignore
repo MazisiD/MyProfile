@@ -1,0 +1,10 @@
+# Node
+node_modules/
+npm-debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Personal documents (kept out of source control)
+Mazisi_Dungelo_Resume.pdf
