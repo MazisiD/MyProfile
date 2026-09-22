@@ -1,0 +1,126 @@
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.block-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-3);
+}
+
+.block-label .slash {
+  opacity: 0.6;
+  color: var(--accent);
+}
+
+.languages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.language-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-1);
+}
+
+.language-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--text);
+}
+
+.language-value {
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.language-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  overflow: hidden;
+}
+
+.language-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-cyan));
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+  transition: width 1s ease-out;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.category-card {
+  padding: 0.75rem 0.85rem;
+  min-width: 0;
+}
+
+.category-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 212, 255, 0.1);
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.category-card .tag {
+  padding: 1px 5px;
+  font-size: 0.6rem;
+}
+
+.category-card .tag-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.concept-tag {
+  color: var(--accent-purple);
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.concepts {
+  margin-top: var(--space-5);
+}

@@ -1,0 +1,43 @@
+<section class="section" id="contact">
+  <div class="container contact-container">
+    <p class="section-label"><span class="slash">// </span>contact</p>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="section-rule"></div>
+
+    @if (contactInfo().location) {
+      <p class="meta-row">{{ contactInfo().location }}</p>
+    }
+
+    <div class="contact-cards">
+      <a class="contact-card" [href]="'mailto:' + contactInfo().email">
+        <span class="contact-icon">&#9993;</span>
+        <span class="contact-text">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">{{ contactInfo().email }}</span>
+        </span>
+      </a>
+      @if (contactInfo().phone) {
+        <a class="contact-card" [href]="'tel:' + contactInfo().phone">
+          <span class="contact-icon">&#128222;</span>
+          <span class="contact-text">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">{{ contactInfo().phone }}</span>
+          </span>
+        </a>
+      }
+      @for (social of contactInfo().socialLinks; track social.url) {
+        <a class="contact-card" [href]="social.url" target="_blank" rel="noopener">
+          @if (techIcon(social.label); as icon) {
+            <img [src]="icon" alt="" class="contact-icon-img" width="18" height="18" loading="lazy" />
+          } @else {
+            <span class="contact-icon">&#128279;</span>
+          }
+          <span class="contact-text">
+            <span class="contact-label">{{ social.label }}</span>
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+

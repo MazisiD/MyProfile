@@ -1,0 +1,89 @@
+<section class="section" id="projects">
+  <div class="container">
+    <p class="section-label"><span class="slash">// </span>projects</p>
+    <h2 class="section-title">What I've Built</h2>
+    <div class="section-rule"></div>
+
+    @if (projects().length === 0) {
+      <p>No projects yet. Add some from the admin dashboard.</p>
+    }
+
+    <div class="project-list">
+      @for (project of projects(); track project.id) {
+        <article class="card project-item">
+          <div class="project-header">
+            <div>
+              <h3>{{ project.title }}</h3>
+              @if (project.category || project.status) {
+                <p class="project-meta">
+                  @if (project.category) { <span>{{ project.category }}</span> }
+                  @if (project.status) { <span class="tag status-tag">{{ project.status }}</span> }
+                </p>
+              }
+            </div>
+            <div class="project-links">
+              @if (project.liveUrl || project.link) {
+                <a class="btn" [href]="project.liveUrl || project.link" target="_blank" rel="noopener">Live</a>
+              }
+              @if (project.sourceUrl) {
+                <a class="btn" [href]="project.sourceUrl" target="_blank" rel="noopener">Source</a>
+              }
+            </div>
+          </div>
+
+          @if (project.tech && project.tech.length) {
+            <div class="tags">
+              @for (tech of project.tech; track tech) {
+                <span class="tag">
+                  @if (techIcon(tech); as icon) {
+                    <img [src]="icon" alt="" class="tag-icon" width="14" height="14" loading="lazy" />
+                  }
+                  {{ tech }}
+                </span>
+              }
+            </div>
+          }
+
+          <div class="project-tabs">
+            @for (tab of tabs; track tab) {
+              <button
+                type="button"
+                class="tab-btn"
+                [class.active]="activeTab(project.id) === tab"
+                (click)="setTab(project.id, tab)"
+              >{{ tab }}</button>
+            }
+          </div>
+
+          <div class="project-content">
+            @switch (activeTab(project.id)) {
+              @case ('demo') { <div [innerHTML]="formatParagraphs(project.demo)"></div> }
+              @case ('problem') {
+                <ul class="tab-highlights">
+                  @for (point of toHighlights(project.problem); track point) {
+                    <li [innerHTML]="formatInline(point)"></li>
+                  }
+                </ul>
+              }
+              @case ('approach') {
+                <ul class="tab-highlights">
+                  @for (point of toHighlights(project.approach); track point) {
+                    <li [innerHTML]="formatInline(point)"></li>
+                  }
+                </ul>
+              }
+              @case ('solution') {
+                <ul class="tab-highlights">
+                  @for (point of toHighlights(project.solution); track point) {
+                    <li [innerHTML]="formatInline(point)"></li>
+                  }
+                </ul>
+              }
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+

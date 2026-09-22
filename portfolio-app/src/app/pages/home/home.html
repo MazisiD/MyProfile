@@ -1,0 +1,75 @@
+<section class="hero section" id="home">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>{{ home().title }}</p>
+      <h1>
+        {{ nameLines().first }}
+        @if (nameLines().rest) {
+          <br />
+          <span class="name-accent">{{ nameLines().rest }}</span>
+        }
+      </h1>
+      <p class="tagline">{{ home().tagline }}</p>
+      <div class="intro" [innerHTML]="formatParagraphs(home().intro)"></div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects"><span class="btn-glyph">&gt;</span> View Projects</a>
+        <a class="btn" href="#contact"><span class="btn-glyph">&gt;</span> Get In Touch</a>
+        @if (home().cvUrl) {
+          <a class="btn" [href]="home().cvUrl" target="_blank" rel="noopener">
+            <span class="btn-glyph">&gt;</span> Resume
+          </a>
+        }
+        @if (socialUrl('github')) {
+          <a class="btn btn-icon" [href]="socialUrl('github')" target="_blank" rel="noopener">
+            @if (techIcon('github'); as icon) {
+              <img [src]="icon" alt="" class="btn-icon-img" width="16" height="16" loading="lazy" />
+            }
+            GitHub
+          </a>
+        }
+        @if (socialUrl('linkedin')) {
+          <a class="btn btn-icon" [href]="socialUrl('linkedin')" target="_blank" rel="noopener">
+            @if (techIcon('linkedin'); as icon) {
+              <img [src]="icon" alt="" class="btn-icon-img" width="16" height="16" loading="lazy" />
+            }
+            LinkedIn
+          </a>
+        }
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <div class="terminal-glow"></div>
+      <div class="terminal-window">
+        <div class="terminal-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="terminal-path">{{ usernameSlug() }}&#64;portfolio ~</span>
+        </div>
+        <div class="terminal-body">
+          @for (line of visibleLines(); track $index) {
+            @if (line.prompt !== undefined) {
+              <div class="terminal-line">
+                <span class="prompt-arrow">&#10095;</span>
+                <span class="prompt-path">{{ line.prompt }}</span>
+                <span class="prompt-cmd">{{ line.cmd }}</span>
+                @if (line.cursor) { <span class="terminal-cursor"></span> }
+              </div>
+            } @else {
+              <div class="terminal-line terminal-output">{{ line.out }}</div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-about />
+<app-experience />
+<app-projects />
+<app-skills />
+<app-contact />
+

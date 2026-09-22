@@ -1,0 +1,77 @@
+<section class="section" id="about">
+  <div class="container">
+    <p class="section-label"><span class="slash">// </span>about</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-rule"></div>
+
+    <div class="about-grid">
+      <div class="about-main">
+        <div class="bio" [innerHTML]="formatParagraphs(about().bio)"></div>
+
+        @if (about().location || about().availability) {
+          <p class="meta-row">
+            @if (about().location) { <span>&#128205; {{ about().location }}</span> }
+            @if (about().availability) { <span>&#128188; {{ about().availability }}</span> }
+          </p>
+        }
+
+        @if (about().skills.length) {
+          <div class="skills">
+            @for (skill of about().skills; track skill) {
+              <span class="tag">
+                @if (techIcon(skill); as icon) {
+                  <img [src]="icon" alt="" class="tag-icon" width="14" height="14" loading="lazy" />
+                }
+                {{ skill }}
+              </span>
+            }
+          </div>
+        }
+
+        @if (about().highlights.length) {
+          <div class="highlights-block">
+            <p class="block-label"><span class="slash">// </span>highlights</p>
+            <ul class="highlights">
+              @for (highlight of about().highlights; track highlight) {
+                <li [innerHTML]="formatInline(highlight)"></li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      @if (about().education.length || about().stats?.length) {
+        <div class="education card">
+          @if (about().education.length) {
+            <p class="block-label"><span class="slash">// </span>education</p>
+            @for (item of about().education; track item.institution) {
+              <div class="education-item">
+                <div class="education-heading">
+                  <span class="education-icon">&#127891;</span>
+                  <h4>{{ item.degree }}</h4>
+                </div>
+                <p class="education-meta">{{ item.institution }} &middot; {{ item.period }}</p>
+                @if (item.note) { <p class="education-note">{{ item.note }}</p> }
+              </div>
+            }
+          }
+
+          @if (about().stats?.length) {
+            <div class="stats-block">
+              <p class="block-label"><span class="slash">// </span>stats</p>
+              <div class="stats-grid">
+                @for (stat of about().stats; track stat.label) {
+                  <div class="stat-box">
+                    <div class="stat-value">{{ stat.value }}</div>
+                    <div class="stat-label">{{ stat.label }}</div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
