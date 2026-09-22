@@ -1,0 +1,119 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit About Page</h2>
+
+    @if (saved()) {
+      <p class="success">Saved!</p>
+    }
+
+    <div class="form-field">
+      <label for="bio">Bio</label>
+      <textarea id="bio" rows="6" [ngModel]="bio()" (ngModelChange)="bio.set($event)"></textarea>
+      <p class="field-hint">Tip: leave a blank line between paragraphs, and wrap text in **double asterisks** for bold.</p>
+    </div>
+
+    <div class="form-field">
+      <label for="skills">Skills (comma-separated)</label>
+      <input id="skills" type="text" [ngModel]="skillsText()" (ngModelChange)="skillsText.set($event)" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="location">Location</label>
+        <input id="location" type="text" [ngModel]="location()" (ngModelChange)="location.set($event)" />
+      </div>
+      <div class="form-field">
+        <label for="availability">Availability</label>
+        <input id="availability" type="text" [ngModel]="availability()" (ngModelChange)="availability.set($event)" />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="highlights">Highlights (one per line)</label>
+      <textarea id="highlights" rows="4" [ngModel]="highlightsText()" (ngModelChange)="highlightsText.set($event)"></textarea>
+      <p class="field-hint">Tip: wrap text in **double asterisks** for bold.</p>
+    </div>
+
+    <h3>Education</h3>
+    @for (item of education(); track $index) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Institution</label>
+            <input
+              type="text"
+              [ngModel]="item.institution"
+              (ngModelChange)="updateEducationField($index, 'institution', $event)"
+            />
+          </div>
+          <div class="form-field">
+            <label>Degree</label>
+            <input
+              type="text"
+              [ngModel]="item.degree"
+              (ngModelChange)="updateEducationField($index, 'degree', $event)"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Period</label>
+            <input
+              type="text"
+              [ngModel]="item.period"
+              (ngModelChange)="updateEducationField($index, 'period', $event)"
+            />
+          </div>
+          <div class="form-field">
+            <label>Note</label>
+            <input
+              type="text"
+              [ngModel]="item.note"
+              (ngModelChange)="updateEducationField($index, 'note', $event)"
+            />
+          </div>
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn" (click)="removeEducation($index)">Remove</button>
+        </div>
+      </div>
+    }
+    <button type="button" class="btn" (click)="addEducation()">Add Education Entry</button>
+
+    <h3>Stats</h3>
+    @for (stat of stats(); track $index) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Value</label>
+            <input
+              type="text"
+              placeholder="2.16d"
+              [ngModel]="stat.value"
+              (ngModelChange)="updateStatField($index, 'value', $event)"
+            />
+          </div>
+          <div class="form-field">
+            <label>Label</label>
+            <input
+              type="text"
+              placeholder="avg cycle time"
+              [ngModel]="stat.label"
+              (ngModelChange)="updateStatField($index, 'label', $event)"
+            />
+          </div>
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn" (click)="removeStat($index)">Remove</button>
+        </div>
+      </div>
+    }
+    <button type="button" class="btn" (click)="addStat()">Add Stat</button>
+
+    <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="save()">
+      {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</section>
+

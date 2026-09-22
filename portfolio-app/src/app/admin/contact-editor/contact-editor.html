@@ -1,0 +1,53 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit Contact Info</h2>
+
+    @if (saved()) {
+      <p class="success">Saved!</p>
+    }
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" [ngModel]="email()" (ngModelChange)="email.set($event)" />
+    </div>
+
+    <div class="form-field">
+      <label for="phone">Phone</label>
+      <input id="phone" type="tel" [ngModel]="phone()" (ngModelChange)="phone.set($event)" />
+    </div>
+
+    <div class="form-field">
+      <label for="location">Location</label>
+      <input id="location" type="text" [ngModel]="location()" (ngModelChange)="location.set($event)" />
+    </div>
+
+    <h3>Social Links</h3>
+    @for (link of socialLinks(); track $index) {
+      <div class="form-row social-row">
+        <div class="form-field">
+          <label>Label</label>
+          <input type="text" [ngModel]="link.label" (ngModelChange)="updateSocialLink($index, 'label', $event)" />
+        </div>
+        <div class="form-field">
+          <label>URL</label>
+          <input type="text" [ngModel]="link.url" (ngModelChange)="updateSocialLink($index, 'url', $event)" />
+        </div>
+        <button type="button" class="btn" (click)="removeSocialLink($index)">Remove</button>
+      </div>
+    }
+
+    <button type="button" class="btn" (click)="addSocialLink()">Add Social Link</button>
+
+    <div class="save-row">
+      <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="save()">
+        {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+      </button>
+    </div>
+  </div>
+</section>
+

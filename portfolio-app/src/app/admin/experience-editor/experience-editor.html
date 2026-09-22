@@ -1,0 +1,114 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit Experience</h2>
+
+    @for (job of experience(); track job.id) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Role</label>
+            <input type="text" [ngModel]="job.role" (ngModelChange)="updateItemField(job, 'role', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Company</label>
+            <input type="text" [ngModel]="job.company" (ngModelChange)="updateItemField(job, 'company', $event)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Location</label>
+            <input type="text" [ngModel]="job.location" (ngModelChange)="updateItemField(job, 'location', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Employment Type</label>
+            <input type="text" placeholder="e.g. Permanent · Full-time" [ngModel]="job.employmentType" (ngModelChange)="updateItemField(job, 'employmentType', $event)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Period</label>
+            <input type="text" [ngModel]="job.period" (ngModelChange)="updateItemField(job, 'period', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Order</label>
+            <input type="number" [ngModel]="job.order" (ngModelChange)="updateItemField(job, 'order', $event)" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Description</label>
+          <textarea rows="3" [ngModel]="job.description" (ngModelChange)="updateItemField(job, 'description', $event)"></textarea>
+          <p class="field-hint">Tip: sentences render as bullet points automatically; wrap text in **double asterisks** for bold.</p>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Tech (comma-separated)</label>
+            <input type="text" [ngModel]="techText(job)" (ngModelChange)="setTech(job, $event)" />
+          </div>
+          <div class="form-field checkbox-field">
+            <label>
+              <input type="checkbox" [ngModel]="job.current" (ngModelChange)="updateItemField(job, 'current', $event)" />
+              Current role
+            </label>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn btn-primary" (click)="saveItem(job)">Save</button>
+          <button type="button" class="btn" (click)="deleteItem(job)">Delete</button>
+        </div>
+      </div>
+    }
+
+    <div class="card item-card">
+      <h3>Add New Entry</h3>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Role</label>
+          <input type="text" [ngModel]="newItem().role" (ngModelChange)="updateNewField('role', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Company</label>
+          <input type="text" [ngModel]="newItem().company" (ngModelChange)="updateNewField('company', $event)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Location</label>
+          <input type="text" [ngModel]="newItem().location" (ngModelChange)="updateNewField('location', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Employment Type</label>
+          <input type="text" placeholder="e.g. Permanent · Full-time" [ngModel]="newItem().employmentType" (ngModelChange)="updateNewField('employmentType', $event)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Period</label>
+          <input type="text" [ngModel]="newItem().period" (ngModelChange)="updateNewField('period', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Order</label>
+          <input type="number" [ngModel]="newItem().order" (ngModelChange)="updateNewField('order', $event)" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Description</label>
+        <textarea rows="3" [ngModel]="newItem().description" (ngModelChange)="updateNewField('description', $event)"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Tech (comma-separated)</label>
+          <input type="text" [ngModel]="newTechText()" (ngModelChange)="setNewTech($event)" />
+        </div>
+        <div class="form-field checkbox-field">
+          <label>
+            <input type="checkbox" [ngModel]="newItem().current" (ngModelChange)="updateNewField('current', $event)" />
+            Current role
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="addItem()">Add Entry</button>
+    </div>
+  </div>
+</section>
+

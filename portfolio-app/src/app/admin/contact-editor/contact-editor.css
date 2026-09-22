@@ -1,0 +1,7 @@
+.social-row {
+  align-items: flex-end;
+}
+
+.save-row {
+  margin-top: var(--space-4);
+}

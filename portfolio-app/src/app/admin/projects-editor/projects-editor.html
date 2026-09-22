@@ -1,0 +1,122 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit Projects</h2>
+
+    @for (project of projects(); track project.id) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Title</label>
+            <input type="text" [ngModel]="project.title" (ngModelChange)="updateItemField(project, 'title', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Order</label>
+            <input type="number" [ngModel]="project.order" (ngModelChange)="updateItemField(project, 'order', $event)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Category</label>
+            <input type="text" [ngModel]="project.category" (ngModelChange)="updateItemField(project, 'category', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Status</label>
+            <input type="text" [ngModel]="project.status" (ngModelChange)="updateItemField(project, 'status', $event)" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Tech (comma-separated)</label>
+          <input type="text" [ngModel]="techText(project)" (ngModelChange)="setTech(project, $event)" />
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Live URL</label>
+            <input type="text" [ngModel]="project.liveUrl" (ngModelChange)="updateItemField(project, 'liveUrl', $event)" />
+          </div>
+          <div class="form-field">
+            <label>Source URL</label>
+            <input type="text" [ngModel]="project.sourceUrl" (ngModelChange)="updateItemField(project, 'sourceUrl', $event)" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Demo</label>
+          <textarea rows="2" [ngModel]="project.demo" (ngModelChange)="updateItemField(project, 'demo', $event)"></textarea>
+        </div>
+        <div class="form-field">
+          <label>Problem</label>
+          <textarea rows="2" [ngModel]="project.problem" (ngModelChange)="updateItemField(project, 'problem', $event)"></textarea>
+        </div>
+        <div class="form-field">
+          <label>Approach</label>
+          <textarea rows="2" [ngModel]="project.approach" (ngModelChange)="updateItemField(project, 'approach', $event)"></textarea>
+        </div>
+        <div class="form-field">
+          <label>Solution</label>
+          <textarea rows="2" [ngModel]="project.solution" (ngModelChange)="updateItemField(project, 'solution', $event)"></textarea>
+          <p class="field-hint">Tip: wrap text in **double asterisks** for bold (Demo/Problem/Approach/Solution). Sentences in Problem/Approach/Solution render as bullet points automatically; Demo uses paragraphs (blank line = new paragraph).</p>
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn btn-primary" (click)="saveItem(project)">Save</button>
+          <button type="button" class="btn" (click)="deleteItem(project)">Delete</button>
+        </div>
+      </div>
+    }
+
+    <div class="card item-card">
+      <h3>Add New Project</h3>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Title</label>
+          <input type="text" [ngModel]="newItem().title" (ngModelChange)="updateNewField('title', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Order</label>
+          <input type="number" [ngModel]="newItem().order" (ngModelChange)="updateNewField('order', $event)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Category</label>
+          <input type="text" [ngModel]="newItem().category" (ngModelChange)="updateNewField('category', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Status</label>
+          <input type="text" [ngModel]="newItem().status" (ngModelChange)="updateNewField('status', $event)" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Tech (comma-separated)</label>
+        <input type="text" [ngModel]="newTechText()" (ngModelChange)="setNewTech($event)" />
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Live URL</label>
+          <input type="text" [ngModel]="newItem().liveUrl" (ngModelChange)="updateNewField('liveUrl', $event)" />
+        </div>
+        <div class="form-field">
+          <label>Source URL</label>
+          <input type="text" [ngModel]="newItem().sourceUrl" (ngModelChange)="updateNewField('sourceUrl', $event)" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Demo</label>
+        <textarea rows="2" [ngModel]="newItem().demo" (ngModelChange)="updateNewField('demo', $event)"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Problem</label>
+        <textarea rows="2" [ngModel]="newItem().problem" (ngModelChange)="updateNewField('problem', $event)"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Approach</label>
+        <textarea rows="2" [ngModel]="newItem().approach" (ngModelChange)="updateNewField('approach', $event)"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Solution</label>
+        <textarea rows="2" [ngModel]="newItem().solution" (ngModelChange)="updateNewField('solution', $event)"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="addItem()">Add Project</button>
+    </div>
+  </div>
+</section>
+

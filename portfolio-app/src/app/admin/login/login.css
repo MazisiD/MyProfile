@@ -1,0 +1,16 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 360px;
+}
+
+.error {
+  color: #ff8a80;
+}

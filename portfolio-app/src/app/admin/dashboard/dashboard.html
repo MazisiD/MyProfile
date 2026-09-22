@@ -1,0 +1,15 @@
+<section class="dashboard section">
+  <div class="container">
+    <div class="dashboard-header">
+      <h2>Admin Dashboard</h2>
+      <button type="button" class="btn" (click)="logout()">Log out</button>
+    </div>
+
+    <div class="section-grid">
+      @for (section of sections; track section.path) {
+        <a class="card section-card" [routerLink]="section.path">{{ section.label }}</a>
+      }
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,41 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit Home Page</h2>
+
+    @if (saved()) {
+      <p class="success">Saved!</p>
+    }
+
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" [ngModel]="draft().name" (ngModelChange)="updateField('name', $event)" />
+    </div>
+
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input id="title" type="text" [ngModel]="draft().title" (ngModelChange)="updateField('title', $event)" />
+    </div>
+
+    <div class="form-field">
+      <label for="tagline">Tagline</label>
+      <input id="tagline" type="text" [ngModel]="draft().tagline" (ngModelChange)="updateField('tagline', $event)" />
+    </div>
+
+    <div class="form-field">
+      <label for="intro">Intro</label>
+      <textarea id="intro" rows="4" [ngModel]="draft().intro" (ngModelChange)="updateField('intro', $event)"></textarea>
+      <p class="field-hint">Tip: leave a blank line between paragraphs, and wrap text in **double asterisks** for bold.</p>
+    </div>
+
+    <div class="form-field">
+      <label for="cvUrl">Resume / CV URL</label>
+      <input id="cvUrl" type="text" [ngModel]="draft().cvUrl" (ngModelChange)="updateField('cvUrl', $event)" />
+    </div>
+
+    <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="save()">
+      {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</section>
+

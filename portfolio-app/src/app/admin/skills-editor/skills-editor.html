@@ -1,0 +1,75 @@
+<section class="editor section">
+  <div class="container">
+    <a class="btn back-link" routerLink="/kayi-kayi">&larr; Back to dashboard</a>
+    <h2>Edit Skills</h2>
+
+    @if (saved()) {
+      <p class="success">Saved!</p>
+    }
+
+    <h3>Core Languages</h3>
+    @for (language of languages(); track $index) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name</label>
+            <input
+              type="text"
+              [ngModel]="language.name"
+              (ngModelChange)="updateLanguageField($index, 'name', $event)"
+            />
+          </div>
+          <div class="form-field">
+            <label>Proficiency (%)</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              [ngModel]="language.proficiency"
+              (ngModelChange)="updateLanguageField($index, 'proficiency', $event)"
+            />
+          </div>
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn" (click)="removeLanguage($index)">Remove</button>
+        </div>
+      </div>
+    }
+    <button type="button" class="btn" (click)="addLanguage()">Add Language</button>
+
+    <h3>Categories</h3>
+    @for (category of categories(); track $index) {
+      <div class="card item-card">
+        <div class="form-field">
+          <label>Category Name</label>
+          <input
+            type="text"
+            [ngModel]="category.name"
+            (ngModelChange)="updateCategoryField($index, 'name', $event)"
+          />
+        </div>
+        <div class="form-field">
+          <label>Skills (comma-separated)</label>
+          <input
+            type="text"
+            [ngModel]="categorySkillsText(category)"
+            (ngModelChange)="updateCategorySkills($index, $event)"
+          />
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn" (click)="removeCategory($index)">Remove</button>
+        </div>
+      </div>
+    }
+    <button type="button" class="btn" (click)="addCategory()">Add Category</button>
+
+    <div class="form-field concepts-field">
+      <label for="concepts">Engineering Concepts (comma-separated)</label>
+      <input id="concepts" type="text" [ngModel]="conceptsText()" (ngModelChange)="conceptsText.set($event)" />
+    </div>
+
+    <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="save()">
+      {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</section>
