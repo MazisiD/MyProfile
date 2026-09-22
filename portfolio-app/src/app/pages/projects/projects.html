@@ -57,7 +57,20 @@
 
           <div class="project-content">
             @switch (activeTab(project.id)) {
-              @case ('demo') { <div [innerHTML]="formatParagraphs(project.demo)"></div> }
+              @case ('demo') {
+                @if (demoVideoEmbedUrl(project.demoVideoUrl); as videoUrl) {
+                  <div class="project-video">
+                    <iframe
+                      [src]="videoUrl"
+                      title="{{ project.title }} demo video"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                }
+                <div [innerHTML]="formatParagraphs(project.demo)"></div>
+              }
               @case ('problem') {
                 <ul class="tab-highlights">
                   @for (point of toHighlights(project.problem); track point) {

@@ -1,7 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Content } from '../../core/services/content';
 import { formatInline, formatParagraphs } from '../../core/rich-text';
 import { techIconUrl } from '../../core/tech-icons';
+import { toEmbedUrl } from '../../core/video-embed';
 
 type ProjectTab = 'demo' | 'problem' | 'approach' | 'solution';
 
@@ -24,6 +26,7 @@ function toHighlights(text: string | null | undefined): string[] {
 })
 export class Projects {
   private readonly contentService = inject(Content);
+  private readonly sanitizer = inject(DomSanitizer);
 
   protected readonly projects = this.contentService.projects;
   protected readonly tabs: ProjectTab[] = ['demo', 'problem', 'approach', 'solution'];
@@ -32,6 +35,18 @@ export class Projects {
   protected readonly formatInline = formatInline;
   protected readonly toHighlights = toHighlights;
   private readonly activeTabs = signal<Record<string, ProjectTab>>({});
+  private readonly embedUrlCache = new Map<string, SafeResourceUrl>();
+
+  demoVideoEmbedUrl(demoVideoUrl: string | undefined): SafeResourceUrl | null {
+    const embed = toEmbedUrl(demoVideoUrl);
+    if (!embed) return null;
+    let safe = this.embedUrlCache.get(embed);
+    if (!safe) {
+      safe = this.sanitizer.bypassSecurityTrustResourceUrl(embed);
+      this.embedUrlCache.set(embed, safe);
+    }
+    return safe;
+  }
 
   activeTab(projectId: string | undefined): ProjectTab {
     if (!projectId) return 'demo';

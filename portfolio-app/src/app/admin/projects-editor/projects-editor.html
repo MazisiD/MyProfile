@@ -44,6 +44,11 @@
           <textarea rows="2" [ngModel]="project.demo" (ngModelChange)="updateItemField(project, 'demo', $event)"></textarea>
         </div>
         <div class="form-field">
+          <label>Demo video URL</label>
+          <input type="text" placeholder="YouTube or Vimeo link (e.g. https://youtu.be/...)" [ngModel]="project.demoVideoUrl" (ngModelChange)="updateItemField(project, 'demoVideoUrl', $event)" />
+          <p class="field-hint">Paste a YouTube or Vimeo link (can be unlisted) - the video plays from there, so it never counts against your database storage.</p>
+        </div>
+        <div class="form-field">
           <label>Problem</label>
           <textarea rows="2" [ngModel]="project.problem" (ngModelChange)="updateItemField(project, 'problem', $event)"></textarea>
         </div>
@@ -102,6 +107,10 @@
       <div class="form-field">
         <label>Demo</label>
         <textarea rows="2" [ngModel]="newItem().demo" (ngModelChange)="updateNewField('demo', $event)"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Demo video URL</label>
+        <input type="text" placeholder="YouTube or Vimeo link (e.g. https://youtu.be/...)" [ngModel]="newItem().demoVideoUrl" (ngModelChange)="updateNewField('demoVideoUrl', $event)" />
       </div>
       <div class="form-field">
         <label>Problem</label>

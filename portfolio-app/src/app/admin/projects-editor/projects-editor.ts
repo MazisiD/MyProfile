@@ -9,6 +9,7 @@ type NewProject = Omit<ProjectItem, 'id'>;
 const EMPTY_NEW_ITEM: NewProject = {
   title: '',
   demo: '',
+  demoVideoUrl: '',
   problem: '',
   approach: '',
   solution: '',
@@ -72,6 +73,7 @@ export class ProjectsEditor {
       await this.contentService.updateProject(item.id, {
         title: item.title,
         demo: item.demo,
+        demoVideoUrl: item.demoVideoUrl,
         problem: item.problem,
         approach: item.approach,
         solution: item.solution,

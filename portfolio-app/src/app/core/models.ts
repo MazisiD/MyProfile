@@ -47,6 +47,7 @@ export interface ProjectItem {
   id?: string;
   title: string;
   demo: string;
+  demoVideoUrl?: string;
   problem: string;
   approach: string;
   solution: string;
