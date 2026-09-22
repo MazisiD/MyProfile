@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; {{ currentYear }} {{ contactInfo().email }}</p>
+
+    @if (contactInfo().socialLinks.length) {
+      <div class="social-links">
+        @for (social of contactInfo().socialLinks; track social.url) {
+          <a class="social-link" [href]="social.url" target="_blank" rel="noopener">
+            @if (techIcon(social.label); as icon) {
+              <img [src]="icon" alt="" class="social-link-icon" width="14" height="14" loading="lazy" />
+            }
+            {{ social.label }}
+          </a>
+        }
+      </div>
+    }
+  </div>
+</footer>

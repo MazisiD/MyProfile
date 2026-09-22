@@ -1,0 +1,28 @@
+<header class="topbar">
+  <a class="brand" routerLink="/" (click)="closeMenu()">
+    <span class="brand-mark">&lt;/&gt;</span>
+    <span class="brand-name">{{ brandHandle() }}</span>
+  </a>
+
+  <button
+    class="menu-toggle"
+    type="button"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-label="Toggle navigation menu"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="nav" [class.nav-open]="isMenuOpen()">
+    @for (link of links; track link.fragment) {
+      <a
+        class="nav-link"
+        [href]="'#' + link.fragment"
+        (click)="closeMenu()"
+      >{{ link.label }}</a>
+    }
+  </nav>
+</header>
