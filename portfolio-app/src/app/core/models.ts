@@ -82,10 +82,17 @@ export interface SkillCategory {
   skills: string[];
 }
 
+export interface PrincipleItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
 export interface SkillsContent {
   languages: SkillLanguage[];
   categories: SkillCategory[];
   concepts: string[];
+  principles: PrincipleItem[];
 }
 
 export interface ContactMessage {
