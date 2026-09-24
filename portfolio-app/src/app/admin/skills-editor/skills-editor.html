@@ -7,6 +7,10 @@
       <p class="success">Saved!</p>
     }
 
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
     <h3>Core Languages</h3>
     @for (language of languages(); track $index) {
       <div class="card item-card">
@@ -67,6 +71,42 @@
       <label for="concepts">Engineering Concepts (comma-separated)</label>
       <input id="concepts" type="text" [ngModel]="conceptsText()" (ngModelChange)="conceptsText.set($event)" />
     </div>
+
+    <h3>Principles</h3>
+    @for (principle of principles(); track $index) {
+      <div class="card item-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Icon (emoji)</label>
+            <input
+              type="text"
+              [ngModel]="principle.icon"
+              (ngModelChange)="updatePrincipleField($index, 'icon', $event)"
+            />
+          </div>
+          <div class="form-field">
+            <label>Title</label>
+            <input
+              type="text"
+              [ngModel]="principle.title"
+              (ngModelChange)="updatePrincipleField($index, 'title', $event)"
+            />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Description</label>
+          <input
+            type="text"
+            [ngModel]="principle.desc"
+            (ngModelChange)="updatePrincipleField($index, 'desc', $event)"
+          />
+        </div>
+        <div class="item-actions">
+          <button type="button" class="btn" (click)="removePrinciple($index)">Remove</button>
+        </div>
+      </div>
+    }
+    <button type="button" class="btn" (click)="addPrinciple()">Add Principle</button>
 
     <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="save()">
       {{ isSaving() ? 'Saving...' : 'Save Changes' }}

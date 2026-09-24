@@ -48,7 +48,8 @@ const DEFAULT_CONTACT_INFO: ContactInfo = {
 const DEFAULT_SKILLS: SkillsContent = {
   languages: [],
   categories: [],
-  concepts: []
+  concepts: [],
+  principles: []
 };
 
 /**
@@ -82,7 +83,10 @@ export class Content {
       if (snap.exists()) this.contactInfo.set(snap.data() as ContactInfo);
     });
     onSnapshot(doc(firestore, 'content', 'skills'), snap => {
-      if (snap.exists()) this.skills.set(snap.data() as SkillsContent);
+      // Spread over DEFAULT_SKILLS: older docs saved before a new field (e.g.
+      // `principles`) existed won't have that key, and reading `.length` on
+      // undefined would throw in the template.
+      if (snap.exists()) this.skills.set({ ...DEFAULT_SKILLS, ...(snap.data() as Partial<SkillsContent>) });
     });
     onSnapshot(
       query(collection(firestore, 'experience'), orderBy('order', 'asc')),

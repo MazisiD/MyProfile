@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Content } from '../../core/services/content';
-import { SkillCategory, SkillLanguage } from '../../core/models';
+import { PrincipleItem, SkillCategory, SkillLanguage } from '../../core/models';
 
 @Component({
   selector: 'app-skills-editor',
@@ -20,8 +20,12 @@ export class SkillsEditor {
     this.contentService.skills().categories.map(category => ({ ...category }))
   );
   protected readonly conceptsText = signal(this.contentService.skills().concepts.join(', '));
+  protected readonly principles = signal<PrincipleItem[]>(
+    this.contentService.skills().principles.map(principle => ({ ...principle }))
+  );
   protected readonly isSaving = signal(false);
   protected readonly saved = signal(false);
+  protected readonly error = signal('');
 
   categorySkillsText(category: SkillCategory): string {
     return category.skills.join(', ');
@@ -65,8 +69,24 @@ export class SkillsEditor {
     this.categories.update(current => current.filter((_, i) => i !== index));
   }
 
+  updatePrincipleField(index: number, field: keyof PrincipleItem, value: string): void {
+    this.principles.update(current =>
+      current.map((principle, i) => (i === index ? { ...principle, [field]: value } : principle))
+    );
+  }
+
+  addPrinciple(): void {
+    this.principles.update(current => [...current, { icon: '', title: '', desc: '' }]);
+  }
+
+  removePrinciple(index: number): void {
+    this.principles.update(current => current.filter((_, i) => i !== index));
+  }
+
   async save(): Promise<void> {
     this.isSaving.set(true);
+    this.error.set('');
+    this.saved.set(false);
     try {
       const concepts = this.conceptsText()
         .split(',')
@@ -76,9 +96,12 @@ export class SkillsEditor {
       await this.contentService.saveSkills({
         languages: this.languages(),
         categories: this.categories(),
-        concepts
+        concepts,
+        principles: this.principles()
       });
       this.saved.set(true);
+    } catch (err) {
+      this.error.set(err instanceof Error ? err.message : 'Failed to save changes.');
     } finally {
       this.isSaving.set(false);
     }
