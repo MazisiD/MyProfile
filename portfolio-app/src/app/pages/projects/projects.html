@@ -51,7 +51,7 @@
                 class="tab-btn"
                 [class.active]="activeTab(project.id) === tab"
                 (click)="setTab(project.id, tab)"
-              >{{ tab }}</button>
+              >{{ tabLabel(tab) }}</button>
             }
           </div>
 
@@ -88,6 +88,13 @@
               @case ('solution') {
                 <ul class="tab-highlights">
                   @for (point of toHighlights(project.solution); track point) {
+                    <li [innerHTML]="formatInline(point)"></li>
+                  }
+                </ul>
+              }
+              @case ('impact') {
+                <ul class="tab-highlights">
+                  @for (point of toHighlights(project.impact); track point) {
                     <li [innerHTML]="formatInline(point)"></li>
                   }
                 </ul>
