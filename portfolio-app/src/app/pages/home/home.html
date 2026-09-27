@@ -21,27 +21,21 @@
           download="Mazisi_Dungelo_Resume.pdf"
           aria-label="Download Resume - Mazisi Dungelo's resume (PDF)"
         >
-          <span class="btn-glyph">&gt;</span> Download Resume
+          <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12" />
+            <path d="M7 10l5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          Resume
         </a>
         @if (home().cvUrl) {
           <a class="btn" [href]="home().cvUrl" target="_blank" rel="noopener">
-            <span class="btn-glyph">&gt;</span> Resume
-          </a>
-        }
-        @if (socialUrl('github')) {
-          <a class="btn btn-icon" [href]="socialUrl('github')" target="_blank" rel="noopener">
-            @if (techIcon('github'); as icon) {
-              <img [src]="icon" alt="" class="btn-icon-img" width="16" height="16" loading="lazy" />
-            }
-            GitHub
-          </a>
-        }
-        @if (socialUrl('linkedin')) {
-          <a class="btn btn-icon" [href]="socialUrl('linkedin')" target="_blank" rel="noopener">
-            @if (techIcon('linkedin'); as icon) {
-              <img [src]="icon" alt="" class="btn-icon-img" width="16" height="16" loading="lazy" />
-            }
-            LinkedIn
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12" />
+              <path d="M7 10l5 5 5-5" />
+              <path d="M5 21h14" />
+            </svg>
+            Resume
           </a>
         }
       </div>

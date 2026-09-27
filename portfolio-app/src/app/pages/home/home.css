@@ -101,6 +101,12 @@ h1 {
   height: 14px;
 }
 
+.btn-icon {
+  margin-right: 4px;
+  vertical-align: -2px;
+  flex-shrink: 0;
+}
+
 .hero-graphic {
   display: flex;
   justify-content: center;
