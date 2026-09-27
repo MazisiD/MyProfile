@@ -51,6 +51,7 @@ export interface ProjectItem {
   problem: string;
   approach: string;
   solution: string;
+  impact?: string;
   link?: string;
   order: number;
   tech: string[];

@@ -59,7 +59,11 @@
         <div class="form-field">
           <label>Solution</label>
           <textarea rows="2" [ngModel]="project.solution" (ngModelChange)="updateItemField(project, 'solution', $event)"></textarea>
-          <p class="field-hint">Tip: wrap text in **double asterisks** for bold (Demo/Problem/Approach/Solution). Sentences in Problem/Approach/Solution render as bullet points automatically; Demo uses paragraphs (blank line = new paragraph).</p>
+          <p class="field-hint">Tip: wrap text in **double asterisks** for bold (Demo/Problem/Approach/Solution/Why It Matters). Sentences in Problem/Approach/Solution/Why It Matters render as bullet points automatically; Demo uses paragraphs (blank line = new paragraph).</p>
+        </div>
+        <div class="form-field">
+          <label>Why It Matters</label>
+          <textarea rows="2" [ngModel]="project.impact" (ngModelChange)="updateItemField(project, 'impact', $event)"></textarea>
         </div>
         <div class="item-actions">
           <button type="button" class="btn btn-primary" (click)="saveItem(project)">Save</button>
@@ -123,6 +127,10 @@
       <div class="form-field">
         <label>Solution</label>
         <textarea rows="2" [ngModel]="newItem().solution" (ngModelChange)="updateNewField('solution', $event)"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Why It Matters</label>
+        <textarea rows="2" [ngModel]="newItem().impact" (ngModelChange)="updateNewField('impact', $event)"></textarea>
       </div>
       <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="addItem()">Add Project</button>
     </div>
