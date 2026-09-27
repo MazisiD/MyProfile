@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Content } from '../../core/services/content';
 import { techIconUrl } from '../../core/tech-icons';
 
@@ -25,4 +25,10 @@ export class Skills {
   protected readonly skills = this.contentService.skills;
   protected readonly techIcon = techIconUrl;
   protected readonly categoryIcon = categoryIcon;
+
+  // Duplicated so the ticker track can scroll seamlessly from -0% to -50%.
+  protected readonly loopedPrinciples = computed(() => {
+    const principles = this.skills().principles;
+    return [...principles, ...principles];
+  });
 }

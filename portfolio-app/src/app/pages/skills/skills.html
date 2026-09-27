@@ -67,5 +67,25 @@
         </div>
       </div>
     }
+
+    @if (skills().principles.length) {
+      <div class="principles card">
+        <p class="block-label"><span class="slash">// </span>principles</p>
+        <div class="principles-ticker">
+          <div class="ticker-track">
+            @for (principle of loopedPrinciples(); track $index) {
+              <div class="principle-item">
+                <div class="principle-head">
+                  <span class="principle-icon">{{ principle.icon }}</span>
+                  <span class="principle-title">{{ principle.title }}</span>
+                </div>
+                <span class="principle-desc">{{ principle.desc }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <p class="ticker-hint">hover to pause</p>
+      </div>
+    }
   </div>
 </section>

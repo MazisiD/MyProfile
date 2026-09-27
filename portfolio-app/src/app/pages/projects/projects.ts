@@ -5,7 +5,15 @@ import { formatInline, formatParagraphs } from '../../core/rich-text';
 import { techIconUrl } from '../../core/tech-icons';
 import { toEmbedUrl } from '../../core/video-embed';
 
-type ProjectTab = 'demo' | 'problem' | 'approach' | 'solution';
+type ProjectTab = 'demo' | 'problem' | 'approach' | 'solution' | 'impact';
+
+const TAB_LABELS: Record<ProjectTab, string> = {
+  demo: 'demo',
+  problem: 'problem',
+  approach: 'approach',
+  solution: 'solution',
+  impact: 'why it matters',
+};
 
 // Breaks a long-form description into short bullet points (split on sentence
 // boundaries) so the tab content reads as scannable highlights instead of
@@ -29,7 +37,8 @@ export class Projects {
   private readonly sanitizer = inject(DomSanitizer);
 
   protected readonly projects = this.contentService.projects;
-  protected readonly tabs: ProjectTab[] = ['demo', 'problem', 'approach', 'solution'];
+  protected readonly tabs: ProjectTab[] = ['demo', 'problem', 'approach', 'solution', 'impact'];
+  protected readonly tabLabel = (tab: ProjectTab): string => TAB_LABELS[tab];
   protected readonly techIcon = techIconUrl;
   protected readonly formatParagraphs = formatParagraphs;
   protected readonly formatInline = formatInline;
